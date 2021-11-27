@@ -4,7 +4,7 @@ from drawer import Drawer
 class Game():
     words = []
     word = ''
-    attempts = 6
+    attempts = 0
     word_letters = []
     used_letters = []
     mistake_letters = []
@@ -12,6 +12,7 @@ class Game():
 
     def start_game(self):
         self.word = choice(self.words)
+        self.attempts = 6
         self.word_letters = list(self.word)
         self.used_letters = []
         self.mistake_letters = []
@@ -22,7 +23,7 @@ class Game():
         list_of_letters = list(self.word_letters)
         while self.word_letters and self.attempts > 0:
             self.show_game()
-            letter = input('Enter letter ')
+            letter = input('Enter the letter ')
             print ('')  # make indent
             if(letter in self.used_letters):
                 print('This letter is already used')
@@ -35,19 +36,24 @@ class Game():
                             self.word_letters.remove(i)
                 elif letter == 'quit':
                     print('Exiting')
+                    return
+                elif letter == self.word:
+                    self.word_letters.clear()   # all letter guessed
                     break
                 else:
                     self.attempts -= 1
                     self.mistake_letters.append(letter)
+                if not self.word_letters or self.attempts == 0:
+                    self.show_game()
 
-        self.show_game()
         if not self.word_letters:
             print('You win!')
         elif self.attempts == 0:
             print('You lose!')
-        else:
-            return
+            print(f'The word is "{self.word}"')
+        self.end_game()
 
+    def end_game(self):
         is_continue = input('Try again? (y/n): ')
         if is_continue == 'y':
             self.start_game()

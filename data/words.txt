@@ -13,3 +13,8 @@ minecraft
 mineral
 sofa
 hat
+plant
+worm
+labtop
+python
+game
