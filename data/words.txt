@@ -9,3 +9,7 @@ bottle
 cable
 son
 daughter
+minecraft
+mineral
+sofa
+hat

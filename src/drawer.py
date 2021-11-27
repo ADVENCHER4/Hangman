@@ -12,7 +12,7 @@ class Drawer():
             print ('          |         |')
         elif attempts == 5:
             print ('            _______')
-            print ('            |/')
+            print ('            |/     |')
             print ('            |     ( )')
             print ('            |')
             print ('            |')
@@ -22,7 +22,7 @@ class Drawer():
             print ('          |         |')
         elif attempts == 4:
             print ('            _______')
-            print ('            |/')
+            print ('            |/     |')
             print ('            |     ( )')                     
             print ('            |      |')
             print ('            |')
@@ -32,7 +32,7 @@ class Drawer():
             print ('          |         |')
         elif attempts == 3:
             print ('            _______')
-            print ('            |/')
+            print ('            |/     |')
             print ('            |     ( )')
             print ('            |      |_')
             print ('            |        \\')
@@ -42,7 +42,7 @@ class Drawer():
             print ('          |         |')
         elif attempts == 2:
             print ('            _______')
-            print ('            |/')
+            print ('            |/     |')
             print ('            |     ( )')
             print ('            |     _|_')
             print ('            |    / | \\')
@@ -52,7 +52,7 @@ class Drawer():
             print ('          |         |')
         elif attempts == 1:
             print ('            _______')
-            print ('            |/')
+            print ('            |/     |')
             print ('            |     ( )')
             print ('            |     _|_')
             print ('            |    / | \\')
@@ -62,7 +62,7 @@ class Drawer():
             print ('          |         |')
         elif attempts == 0:
             print ('            _______')
-            print ('            |/')
+            print ('            |/     |')
             print ('            |     ( )')
             print ('            |     _|_')
             print ('            |    / | \\')
