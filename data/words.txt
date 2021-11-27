@@ -1,0 +1,11 @@
+mother
+father
+bird
+tiger
+cat
+dog
+table
+bottle
+cable
+son
+daughter
