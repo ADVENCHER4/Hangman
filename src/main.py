@@ -1,30 +1,105 @@
 from random import choice
-from drawer import Drawer
+
+class Drawer():
+    def draw_hangman(attempts):
+        if attempts == 6:
+            print ('            _______')
+            print ('            |/')
+            print ('            |')
+            print ('            |')
+            print ('            |')
+            print ('            |')
+            print ('            |')
+            print ('          __|________')
+            print ('          |         |')
+        elif attempts == 5:
+            print ('            _______')
+            print ('            |/     |')
+            print ('            |     ( )')
+            print ('            |')
+            print ('            |')
+            print ('            |')
+            print ('            |')
+            print ('          __|________')
+            print ('          |         |')
+        elif attempts == 4:
+            print ('            _______')
+            print ('            |/     |')
+            print ('            |     ( )')                     
+            print ('            |      |')
+            print ('            |')
+            print ('            |')
+            print ('            |')
+            print ('          __|________')
+            print ('          |         |')
+        elif attempts == 3:
+            print ('            _______')
+            print ('            |/     |')
+            print ('            |     ( )')
+            print ('            |      |_')
+            print ('            |        \\')
+            print ('            |')
+            print ('            |')
+            print ('          __|________')
+            print ('          |         |')
+        elif attempts == 2:
+            print ('            _______')
+            print ('            |/     |')
+            print ('            |     ( )')
+            print ('            |     _|_')
+            print ('            |    / | \\')
+            print ('            |')
+            print ('            |')
+            print ('          __|________')
+            print ('          |         |')
+        elif attempts == 1:
+            print ('            _______')
+            print ('            |/     |')
+            print ('            |     ( )')
+            print ('            |     _|_')
+            print ('            |    / | \\')
+            print ('            |       \\')
+            print ('            |')
+            print ('          __|________')
+            print ('          |         |')
+        elif attempts == 0:
+            print ('            _______')
+            print ('            |/     |')
+            print ('            |     ( )')
+            print ('            |     _|_')
+            print ('            |    / | \\')
+            print ('            |     / \\')
+            print ('            |')
+            print ('          __|________')
+            print ('          |         |')
+
+class Player():
+    def player_input():
+        letter = input('Enter the letter ')
+        print ('')  # make indent
+        return letter
 
 class Game():
-    words = []
-    word = ''
-    attempts = 0
-    word_letters = []
-    used_letters = []
-    mistake_letters = []
-    guessed_letters = []
-
-    def start_game(self):
+    def __init__(self):
+        self.words = []
+        self.get_words()
+        self.start()
+    
+    def start(self):
         self.word = choice(self.words)
         self.attempts = 6
         self.word_letters = list(self.word)
         self.used_letters = []
         self.mistake_letters = []
         self.guessed_letters = ['_' for _ in range(len(self.word_letters))]
-        self.do_game()
+        self.list_of_letters = list(self.word_letters)
+        self.loop()
 
-    def do_game(self):
-        list_of_letters = list(self.word_letters)
+    def loop(self):
         while self.word_letters and self.attempts > 0:
             self.show_game()
-            letter = input('Enter the letter ')
-            print ('')  # make indent
+            letter = Player.player_input()
+
             if(letter in self.used_letters):
                 print('This letter is already used')
             else:
@@ -32,17 +107,21 @@ class Game():
                 if(letter in self.word_letters and len(letter) == 1):
                     for i in self.word_letters:
                         if(i == letter):
-                            self.guessed_letters[list_of_letters.index(i)] = i
+                            self.guessed_letters[self.list_of_letters.index(i)] = i
                             self.word_letters.remove(i)
                 elif letter == 'quit':
                     print('Exiting')
-                    return
+                    break
                 elif letter == self.word:
-                    self.word_letters.clear()   # all letter guessed
+                    self.word_letters.clear()   # all letters guessed
+                    break
+                elif not letter == self.word and len(letter) > 1:
+                    self.attempts = 0   # if you wrtie word and do not guess
                     break
                 else:
                     self.attempts -= 1
                     self.mistake_letters.append(letter)
+
                 if not self.word_letters or self.attempts == 0:
                     self.show_game()
 
@@ -51,12 +130,14 @@ class Game():
         elif self.attempts == 0:
             print('You lose!')
             print(f'The word is "{self.word}"')
-        self.end_game()
+        else:
+            return
+        self.end()
 
-    def end_game(self):
+    def end(self):
         is_continue = input('Try again? (y/n): ')
         if is_continue == 'y':
-            self.start_game()
+            self.start()
 
     def get_words(self):
         with open('data\\words.txt', 'r') as f:
@@ -70,9 +151,5 @@ class Game():
         print(f'Attemps remain: {self.attempts}')
         print('')   # make indent
 
-    def __init__(self):
-        self.get_words()
-        self.start_game()
-
 if __name__ == '__main__':
-    game = Game()
+    Game()
